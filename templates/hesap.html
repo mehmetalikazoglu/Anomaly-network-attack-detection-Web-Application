@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Hesap Ayarları</h2>
+
+<!-- Kullanıcı bilgilerini güncelleme formu -->
+<form method="POST" action="{{ url_for('hesap_guncelle') }}">
+    <input type="hidden" name="bilgi_guncelle">
+    <div class="mb-3">
+        <label class="form-label">Kullanıcı Adı:</label>
+        <input type="text" class="form-control" name="kullanici_adi" value="{{ kullanici.kullanici_adi }}" required>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">E-posta:</label>
+        <input type="email" class="form-control" name="email" value="{{ kullanici.email }}" required>
+    </div>
+    
+    <button type="submit" class="btn btn-primary">Bilgileri Güncelle</button>
+</form>
+
+<br>
+
+<!-- Şifre değiştirme formu -->
+<form method="POST" action="{{ url_for('hesap_guncelle') }}">
+    <input type="hidden" name="sifre_guncelle">
+    <div class="mb-3">
+        <label class="form-label">Mevcut Şifre:</label>
+        <input type="password" class="form-control" name="mevcut_sifre" placeholder="Mevcut şifrenizi girin" required>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Yeni Şifre:</label>
+        <input type="password" class="form-control" name="yeni_sifre" placeholder="Yeni şifrenizi girin" required>
+    </div>
+    <button type="submit" class="btn btn-warning">Şifreyi Güncelle</button>
+</form>
+
+<br>
+
+<!-- Hesabı silme formu -->
+<form method="POST" action="{{ url_for('hesap_sil') }}">
+    <button type="submit" class="btn btn-danger">Hesabı Sil</button>
+</form>
+
+{% endblock %}

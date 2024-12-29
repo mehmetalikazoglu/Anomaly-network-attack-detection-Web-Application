@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Hoş Geldin, {{ current_user.kullanici_adi }}!</h1>
+<p>Burada dosyalarını yükleyip analiz yapabilirsin.</p>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ana Sayfa</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+    <div class="container text-center mt-5">
+        <h1 class="mb-4 text-primary">Anomalik Ağ Trafiği Tespiti</h1>
+        <p class="lead">Sisteminizdeki şüpheli ağ trafiğini tespit edin ve güvenliği artırın!</p>
+
+        <a href="/upload" class="btn btn-primary btn-lg mt-3">Dosya Yükle</a>
+    </div>
+
+
+<br>
+<br>
+    <div> 
+        <br>
+        <br>
+        <br>
+        <h2>Ne yapıyoruz ?</h2>
+        <p>Bu proje, bir ağda gerçekleşen normal ve anormal (şüpheli veya zararlı) aktiviteleri ayırt etmek için geliştirildi.
+            Amaç, saldırıları veya potansiyel tehditleri tespit ederek, ağın güvenliğini artırmak ve sistemleri korumaktır.
+            <br>
+            Daha basit bir ifadeyle: Bir otel düşünün. Gelen herkesin kim olduğunu, 
+            neden geldiğini bilmeniz gerekiyor. Eğer birisi kötü niyetle (örneğin, hırsızlık için) geliyorsa, 
+            bunu önceden fark edebilmek çok önemli. Bizim projemiz,
+            ağ üzerindeki "kötü niyetli ziyaretçileri" (anomalik trafiği) tanımaya  odaklanıyor. </p><br><br>
+            <h2>Ağ Trafiği Nedir?</h2>
+            <p>Ağ trafiği, bilgisayar ağları üzerinden veri paketlerinin iletilmesiyle oluşan veri akışını ifade eder.
+             Daha basit bir ifadeyle, cihazlar arasında internet veya yerel ağ (LAN) üzerinden gönderilen ve alınan 
+             verilerin toplamına "ağ trafiği" denir.
+            <br>
+            Bunu, bir şehrin yollarındaki araçların gidip gelmesine benzetebiliriz.
+            Nasıl ki arabalar bir yerden bir yere gidip yol kullanıyorsa, bilgisayarlar, 
+            telefonlar ve diğer cihazlar da internetteki bilgileri almak veya göndermek için bir “yol” kullanır.
+            </p><br><br>
+            <h2>Kendi Ağ Trafiğimi Nasıl Tarayabilirim?</h2>
+            <p>Ağınızı <a href="https://www.wireshark.org/" target="_blank">Wireshark</a>, <a href="https://www.solarwinds.com/" target="_blank">SolarWinds</a>, 
+               <a href="https://www.manageengine.com/products/netflow/" target="_blank">NetFlow</a> gibi araçları trafiği analiz etmek için kullanabilirsiniz.
+            <br> Daha sonra taratttığınız ağınızı .csv dosya haline getirip, yukarıda belirtilen 'Dosya Yükle' kısmına yükleyebilirsiniz.</p><br><br>
+        <h6> Şu ana kadar kaç kişi taratmış bilmek ister misiniz ?
+            
+        <a href="/kullanicilar" > Evet</a>
+    </h6><br><br>
+    </div>
+</body>
+
+{% endblock %}

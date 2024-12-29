@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Kullanıcı Listesi</h2>
+
+<form method="POST" action="{{ url_for('kullanici_listele') }}">
+    
+</form>
+
+{% if kullanicilar %}
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Kullanıcı Adı</th>
+            <th>E-posta</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for index, kullanici in enumerate(kullanicilar, start=1) %}
+        <tr>
+            <td>{{ index }}</td>
+            <td>{{ kullanici.kullanici_adi }}</td>
+            <td>{{ kullanici.email }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+    <tfoot>
+        <tr>
+            <td colspan="2"><strong>Toplam Kullanıcı Sayısı:</strong></td>
+            <td><strong>{{ toplam }}</strong></td>
+        </tr>
+    </tfoot>
+</table>
+{% else %}
+<p>Henüz hiçbir kullanıcı kaydolmamış.</p>
+{% endif %}
+{% endblock %}

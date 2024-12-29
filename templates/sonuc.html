@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analiz Sonuçları</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+    <div class="container mt-5">
+        <h1 class="text-center text-primary">Analiz Sonuçları</h1>
+        <p class="text-center">Aşağıda anomalik trafik verileri listelenmiştir.</p>
+    <div class="text-center mt-5">
+         <a href="/" class="btn btn-secondary">Ana Sayfa</a>
+        <a href="/upload" class="btn btn-primary">Yeni Analiz</a>
+     </div>
+        
+       
+{{ anomalies }}
+        </textarea><br>
+
+        <h2 class="text-center text-success">Ağ Durumu</h2>
+        <p class="text-center">
+            Toplam Trafik: <strong>{{ total_traffic }}</strong><br>
+            Normal Trafik Yüzdesi: <strong>{{ security_score }}%</strong><br>
+            Durum: <span class="badge bg-{{ 'success' if security_score > 80 else 'warning' if security_score > 50 else 'danger' }}">{{ security_status }}</span>
+        </p>
+
+        <h3 class="text-primary mt-4">Saldırı Türleri ve Sayıları</h3>
+        <ul class="list-group">
+            {% for attack, count in attack_counts.items() %}
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                {{ attack }}
+                <span class="badge bg-secondary">{{ count }}</span>
+            </li>
+            {% endfor %}
+        </ul>
+        <div class="text-center"> 
+            <p>Yukarıda tespit edilen veriler yapay zeka tarafından tespit edilmiştir, hata payı bulunmaktadır.</p></div>
+
+        <div class="mt-5">
+            <h2>Ağındaki Saldırı Türleri Ne Anlama Geliyor?</h2><br><br>
+
+            <h4 class="text-success mt-2">Normal</h4>
+            <p>Normal etiketli olanlar, sistemde herhangi bir zararlı veya şüpheli davranış içermeyen, günlük kullanıcı trafiğidir. Örneğin e-posta göndermek, web sitelerine göz atmak, dosya indirmek gibi sıradan internet kullanımıdır.</p><br>
+
+            <h4>Fuzzers (Sistem Şaşırtıcı Denemeler)</h4>
+            <p> Sistemin nasıl tepki vereceğini görmek için ona rastgele veya beklenmedik veriler gönderme saldırısıdır.Örneğin bir ATM cihazına sürekli yanlış PIN numaralarını girerek cihazın hata vermesine veya geçici olarak kapanmasına neden olmak gib </p><br>
+
+            <h4>Reconnaissance (Keşif veya Tarama)</h4>
+            <p>Sistemin nasıl tepki vereceğini görmek için ona rastgele veya beklenmedik veriler gönderme saldırısıdır. Örneğin bir ATM cihazına sürekli yanlış PIN numaralarını girerek cihazın hata vermesine veya geçici olarak kapanmasına neden olmak gibi.</p><br>
+
+            <h4>DoS (Denial of Service - Hizmet Engelleme)</h4>
+            <p>Sistem kaynaklarını aşırı yükleyerek hizmeti kullanılamaz hale getirmeye çalışır. Örneğin restorana sürekli sahte siparişler vererek mutfağı meşgul etmek, gerçek müşterilere hizmet verilmesini engellemek gibi.</p><br>
+
+            <h4>Shellcode</h4>
+            <p>Sistemin kontrolünü ele geçirmek için saldırganların özel olarak hazırlanmış zararlı kodlar göndermesidir. Örneğin bir bilgisayarın arka kapısından sızıp gizlice komutlar çalıştırmak, örneğin sisteme "tüm dosyaları sil" komutu vermek gibi.</p><br>
+
+            <h4>Analysis (Saldırı Analizi veya Tehdit Algılama)</h4>
+            <p>Hedef sistem hakkında bilgi toplama veya kötü amaçlı yazılımlar yüklemek için yapılan faaliyetlerdir. Örneğin bir hırsızın, güvenlik kameralarının nerede olduğunu ve ne kadar süre kayıt yaptığını anlamaya çalışması gibi.</p><br>
+
+            <h4>Exploits (Açık İstismarı)</h4>
+            <p>Sistemdeki bilinen bir zayıflıktan faydalanarak sistemi ele geçirme girişimidir. Örneğin kırık bir pencereyi kullanarak bir eve girmek veya bir cihazın eski yazılımındaki bir güvenlik açığını kullanarak sisteme erişmek gibi.</p><br>
+
+            <h4>Generic</h4>
+            <p>Sistemdeki şifreleri veya güvenlik önlemlerini kırmak için kullanılan genel saldırılardır. Örneğin bir kasanın şifresini sürekli kombinasyonlar deneyerek çözmeye çalışmak gibi. Bilgisayar ağlarında bu, çok hızlı ve organize bir şekilde şifre tahmin etmeyi içerebilir.</p><br>
+        </div>
+ <!-- Güvenlik Önlemleri -->
+ <div class="mt-5">
+    <h2>Alınabilecek Güvenlik Önlemleri</h2>
+    <ul class="list-group mt-3">
+        <li class="list-group-item">1. <strong>Güçlü Parolalar Kullanın:</strong> Şifreleriniz tahmin edilemez ve farklı hesaplar için benzersiz olmalıdır.</li>
+        <li class="list-group-item">2. <strong>Güncel Yazılım Kullanın:</strong> Sistemlerinizi ve yazılımlarınızı düzenli olarak güncelleyerek bilinen açıkları kapatın.</li>
+        <li class="list-group-item">3. <strong>Güvenlik Duvarı ve IDS/IPS Kullanın:</strong> Ağa gelen ve giden trafiği izleyin ve şüpheli aktiviteleri tespit edin.</li>
+        <li class="list-group-item">4. <strong>Ağınızı Segmentlere Ayırın:</strong> Kritik sistemleri izole ederek bir saldırganın tüm ağı ele geçirmesini zorlaştırın.</li>
+        <li class="list-group-item">5. <strong>Çalışan Eğitimleri:</strong> Çalışanlarınıza siber güvenlik farkındalığı eğitimi verin.</li>
+        <li class="list-group-item">6. <strong>Veri Şifreleme:</strong> Hassas verilerinizi korumak için güçlü şifreleme yöntemleri kullanın.</li>
+        <li class="list-group-item">7. <strong>Güvenlik Günlüklerini Analiz Edin:</strong> Düzenli olarak log analizleri yaparak olağandışı davranışları tespit edin.</li>
+        <li class="list-group-item">8. <strong>Güvenli Erişim Politikaları Uygulayın:</strong> İki faktörlü kimlik doğrulama (2FA) gibi yöntemler kullanın.</li>
+    </ul>
+</div><br><br>
+
+    </div>
+</body>
+</html>
